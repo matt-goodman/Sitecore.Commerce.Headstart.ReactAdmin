@@ -11,6 +11,9 @@ import Pagination from "../Pagination/Pagination"
 export interface IDefaultResource {
   ID?: string
   Name?: string
+  Active?: boolean
+  FirstName?: string
+  LastName?: string
 }
 
 export interface ListViewTableOptions<T>
@@ -35,6 +38,7 @@ interface IListView<T, F = any> {
   defaultServiceOptions?: ServiceOptions
   service?: (...args) => Promise<T extends Product ? ListPageWithFacets<T, F> : ListPage<T>>
   itemActions?: (item: T) => ListViewTemplate
+  itemHrefResolver?: (item: T) => string
   tableOptions: ListViewTableOptions<T>
   gridOptions?: ListViewGridOptions<T>
   paramMap?: LocationSearchMap
@@ -78,6 +82,7 @@ const ListView = <T extends IDefaultResource>({
   paramMap,
   queryMap,
   filterMap,
+  itemHrefResolver,
   itemActions,
   tableOptions,
   gridOptions,
@@ -252,6 +257,7 @@ const ListView = <T extends IDefaultResource>({
               loading={loading}
               emptyDisplay={isSearching ? noResultsMessage : noDataMessage}
               gridItemActions={itemActions}
+              itemHrefResolver={itemHrefResolver}
               data={data && data.Items}
               selected={selected}
               onSelectChange={handleSelectChange}
@@ -261,6 +267,7 @@ const ListView = <T extends IDefaultResource>({
             <DataTable
               {...tableOptions}
               loading={loading}
+              itemHrefResolver={itemHrefResolver}
               rowActions={itemActions}
               data={data && data.Items}
               selected={selected}
@@ -283,6 +290,7 @@ const ListView = <T extends IDefaultResource>({
     viewMode,
     loading,
     itemActions,
+    itemHrefResolver,
     tableOptions,
     gridOptions,
     isSearching,

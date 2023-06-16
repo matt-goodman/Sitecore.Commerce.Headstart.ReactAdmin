@@ -35,12 +35,12 @@ import {ISpec} from "types/ordercloud/ISpec"
 
 type ProductDataProps = {
   composedProduct: ComposedProduct
-  setComposedProduct: React.Dispatch<React.SetStateAction<ComposedProduct>>
+  setComposedProduct?: React.Dispatch<React.SetStateAction<ComposedProduct>>
 }
 
 export default function ProductSpecs({composedProduct, setComposedProduct}: ProductDataProps) {
   const color = useColorModeValue("textColor.900", "textColor.100")
-  const bg = useColorModeValue("brand.500", "brand.500")
+  const bg = useColorModeValue("accent.500", "accent.500")
   const okColor = useColorModeValue("okColor.800", "okColor.200")
   const errorColor = useColorModeValue("errorColor.800", "errorColor.200")
   const [expanded, setExpanded] = useState(false)
@@ -126,7 +126,6 @@ export default function ProductSpecs({composedProduct, setComposedProduct}: Prod
   return (
     <>
       <>
-        <Heading size={{base: "sm", md: "md", lg: "md"}}>Specs2</Heading>{" "}
         {(isLoading || !composedProduct?.Product) && expanded ? (
           <Box pt={6} textAlign={"center"}>
             Updating... <BrandedSpinner />
@@ -144,7 +143,7 @@ export default function ProductSpecs({composedProduct, setComposedProduct}: Prod
                       <Th color={color}>Name</Th>
                       <Th color={color}>Number Options</Th>
                       <Th color={color}>Defines Variant</Th>
-                      <Th color={color}>Action</Th>
+                      <Th color={color}>Options</Th>
                     </Tr>
                   </Thead>
                   <Tbody alignContent={"center"}>

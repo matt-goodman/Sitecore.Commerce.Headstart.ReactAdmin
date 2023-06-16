@@ -43,13 +43,13 @@ import BrandedSpinner from "../branding/BrandedSpinner"
 import BrandedTable from "../branding/BrandedTable"
 
 type ProductDataProps = {
-  product: RequiredDeep<Product<any>>
+  product: IProduct,
   catalog: Catalog
 }
 
 export default function ProductCategoryAssignments({product, catalog}: ProductDataProps) {
   const [productCategoryAssignments, setProductCategoryAssignments] = useState<Category[]>(null)
-  const [componentProduct, setComponentProduct] = useState<RequiredDeep<Product<any>>>(product)
+  const [componentProduct, setComponentProduct] = useState<Product>(product)
   const [isLoading, setIsLoading] = useState(false)
   const {isOpen, onOpen, onClose} = useDisclosure()
   const cancelRef = React.useRef()
@@ -59,7 +59,7 @@ export default function ProductCategoryAssignments({product, catalog}: ProductDa
   const [newCategory, setNewCategory] = useState("")
 
   const color = useColorModeValue("textColor.900", "textColor.100")
-  const bg = useColorModeValue("brand.500", "brand.500")
+  const bg = useColorModeValue("accent.500", "accent.500")
 
   useEffect(() => {
     async function GetAssignments() {

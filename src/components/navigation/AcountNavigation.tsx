@@ -1,53 +1,37 @@
+import {ChevronDownIcon} from "@chakra-ui/icons"
 import {
   Avatar,
   Badge,
-  Button,
   Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  Flex,
   HStack,
   Icon,
-  Image,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
-  Select,
   Show,
   Text,
-  Tooltip,
   useColorMode,
   useColorModeValue,
   useDisclosure
 } from "@chakra-ui/react"
-import { BsMoonStarsFill, BsSun } from "react-icons/bs"
-import { TbDoorExit, TbInbox, TbMoon, TbPalette, TbSun, TbUserCircle } from "react-icons/tb";
-import React, { useState } from "react"
-import { ChevronDownIcon } from "@chakra-ui/icons"
+import {appPermissions} from "constants/app-permissions.config"
+import {useAuth} from "hooks/useAuth"
+import React, {useState} from "react"
+import {TbDoorExit, TbInbox, TbPalette, TbUserCircle} from "react-icons/tb"
 import Cookies from "universal-cookie"
-import { ItemContent } from "../generic/ItemContent"
 import ProtectedContent from "../auth/ProtectedContent"
-import { appPermissions } from "constants/app-permissions.config"
-import { useAuth } from "hooks/useAuth"
-import { Link } from "./Link"
-import { ColorPicker } from "../branding/ColorPicker";
-import { LogoUploader } from "../branding/LogoUploader";
-import { FontUploader } from "../branding/FontUploader";
-import { ThemeDrawer } from "./ThemeDrawer";
+import {ItemContent} from "../generic/ItemContent"
+import {ThemeDrawer} from "./ThemeDrawer"
 
 const MobileNavigation = () => {
-  const { Logout } = useAuth()
+  const {Logout} = useAuth()
   let usersToken = typeof window !== "undefined" ? localStorage.getItem("usersToken") : ""
   let menuBg = useColorModeValue("white", "navy.800")
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {isOpen, onOpen, onClose} = useDisclosure()
   const btnRef = React.useRef()
-  const { colorMode, toggleColorMode } = useColorMode()
+  const {colorMode, toggleColorMode} = useColorMode()
   const color = useColorModeValue("textColor.900", "textColor.100")
   const borderColor = useColorModeValue("white", "gray.700")
   const [selectedOption, setSelectedOption] = useState<String>()
@@ -73,7 +57,25 @@ const MobileNavigation = () => {
       <Menu>
         <MenuButton pos={"relative"}>
           <Icon as={TbInbox} strokeWidth="1.5" fontSize="2xl" />
-          <Badge display={"flex"} alignItems="center" justifyContent={"center"} border={"2px solid"} borderColor={borderColor} color="white" h={"1em"} w={"1em"} borderRadius={"full"} pos={"absolute"} bgColor="red.500" fontSize={"xxs"} p={2} top={"-9px"} left="12px">3</Badge>
+          <Badge
+            display={"flex"}
+            alignItems="center"
+            justifyContent={"center"}
+            border={"2px solid"}
+            borderColor={borderColor}
+            color="white"
+            h={"1em"}
+            w={"1em"}
+            borderRadius={"full"}
+            pos={"absolute"}
+            bgColor="red.500"
+            fontSize={"xxs"}
+            p={2}
+            top={"-9px"}
+            left="12px"
+          >
+            3
+          </Badge>
         </MenuButton>
         <MenuList borderRadius="lg" p={3} display="flex" flexDirection="column" gap={1}>
           <MenuItem borderRadius="lg">
@@ -119,9 +121,7 @@ const MobileNavigation = () => {
               border=".5px solid #ccc"
             />
             <Show above="md">
-              <Text>
-                {usersToken}
-              </Text>
+              <Text>{usersToken}</Text>
               <ChevronDownIcon />
             </Show>
           </HStack>
@@ -138,18 +138,23 @@ const MobileNavigation = () => {
             </MenuItem>
           </ProtectedContent>
           <ProtectedContent hasAccess={appPermissions.MeManager}>
-            <MenuItem onClick={toggleColorMode} icon={<Icon as={colorMode === "dark" ? TbSun : TbMoon} strokeWidth="1.25" fontSize="1.5em" />} lineHeight="0">
-              Color Mode
-            </MenuItem>
-          </ProtectedContent>
-          <ProtectedContent hasAccess={appPermissions.MeManager}>
-            <MenuItem ref={btnRef} onClick={onOpen} _hover={{ textDecoration: "none" }} lineHeight="0"
-              icon={<Icon as={TbPalette} strokeWidth="1.25" fontSize="1.5em" />}>
+            <MenuItem
+              ref={btnRef}
+              onClick={onOpen}
+              _hover={{textDecoration: "none"}}
+              lineHeight="0"
+              icon={<Icon as={TbPalette} strokeWidth="1.25" fontSize="1.5em" />}
+            >
               Theming
             </MenuItem>
           </ProtectedContent>
           <MenuDivider />
-          <MenuItem color="danger.500" onClick={() => Logout()} lineHeight="0" icon={<Icon as={TbDoorExit} display="inline-flex" lineHeight="0" strokeWidth="1.25" fontSize="1.5em" />}>
+          <MenuItem
+            color="danger.500"
+            onClick={() => Logout()}
+            lineHeight="0"
+            icon={<Icon as={TbDoorExit} display="inline-flex" lineHeight="0" strokeWidth="1.25" fontSize="1.5em" />}
+          >
             Log Out
           </MenuItem>
         </MenuList>

@@ -36,13 +36,14 @@ import {useState} from "react"
 
 type ProductDataProps = {
   composedProduct: ComposedProduct
-  setComposedProduct: React.Dispatch<React.SetStateAction<ComposedProduct>>
+  setComposedProduct?: React.Dispatch<React.SetStateAction<ComposedProduct>>
 }
 
 export default function ProductVariants({composedProduct, setComposedProduct}: ProductDataProps) {
   const {colorMode, toggleColorMode} = useColorMode()
   const color = useColorModeValue("textColor.900", "textColor.100")
-  const gradient = colorMode === "light" ? "linear(to-t, brand.300, brand.400)" : "linear(to-t, brand.600, brand.500)"
+  const gradient =
+    colorMode === "light" ? "linear(to-t, accent.300, accent.400)" : "linear(to-t, accent.600, accent.500)"
   const shadow = "5px 5px 5px #999999"
   const okColor = useColorModeValue("okColor.800", "okColor.200")
   const errorColor = useColorModeValue("errorColor.800", "errorColor.200")
@@ -96,7 +97,7 @@ export default function ProductVariants({composedProduct, setComposedProduct}: P
               {composedProduct?.Variants?.length ?? 0 > 0 ? (
                 <>
                   <BrandedTable>
-                    <Thead boxShadow={shadow} bgGradient={gradient}>
+                    <Thead>
                       <Tr>
                         <Th color={color}>ID</Th>
                         <Th color={color}>Name</Th>

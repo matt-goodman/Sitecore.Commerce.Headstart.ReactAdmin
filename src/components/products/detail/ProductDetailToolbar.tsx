@@ -4,14 +4,12 @@ import ViewProduct from "@/components/demo/ViewProduct"
 import Link from "next/link"
 import ConfirmDelete from "@/components/shared/ConfirmDelete"
 import {
-  Box,
   Button,
   Hide,
   HStack,
   IconButton,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
   Stack,
@@ -27,8 +25,8 @@ import {ProductDetailTab} from "./ProductDetail"
 import ViewManager from "./ViewManager"
 import SubmitButton from "@/components/react-hook-form/submit-button"
 import ResetButton from "@/components/react-hook-form/reset-button"
-import {HamburgerIcon, AddIcon, ExternalLinkIcon, RepeatIcon, EditIcon} from "@chakra-ui/icons"
-import {TbLanguage, TbPlus, TbShoppingCartPlus, TbTableExport, TbTrash} from "react-icons/tb"
+import {HamburgerIcon} from "@chakra-ui/icons"
+import {TbPlus} from "react-icons/tb"
 
 interface ProductDetailToolbarProps {
   product: IProduct
@@ -104,7 +102,7 @@ export default function ProductDetailToolbar({
                 </MenuItem>
               </Link>
               <ViewProduct />
-              <ExportToCsv />
+              <ExportToCsv variant="menuitem" />
               <LanguageSelector />
               <ConfirmDelete deleteText="Delete Product" loading={deleteLoading} onDelete={onDelete} />
             </MenuList>
