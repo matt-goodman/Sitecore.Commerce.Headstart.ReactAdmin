@@ -132,7 +132,7 @@ const SupplierUserList: FC<ISupplierUserList> = ({supplierid}) => {
       itemActions={renderSupplierUsersActionMenu}
     >
       {({renderContent, items, ...listViewChildProps}) => (
-        <Container maxW="100%" bgColor="st.mainBackgroundColor" flexGrow={1} p={[4, 6, 8]}>
+        <Container maxW="100%" /* bgColor="st.mainBackgroundColor" */ flexGrow={1} p={[4, 6, 8]}>
           <Box>
             <SupplierUserListToolbar supplierid={supplierid} {...listViewChildProps} />
           </Box>
